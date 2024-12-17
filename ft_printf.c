@@ -35,7 +35,7 @@ int ft_putstr(char *s)
 {
 	int i = 0;
 	if (!s)
-		s = "(null)";
+		s = "(null)"; // check for null string
 	while (s[i])
 	{
 		write(1, &s[i], 1); // write one character at a time
@@ -67,15 +67,13 @@ int	ft_putnbr(int n)
 
 int	ft_puthex(unsigned int n)
 {
-	char	*hex;
+	char	hex[16] = "0123456789abcdef"; // possible characters in hex
 	int count = 0;
-
-	hex = "0123456789abcdef"; // possible character in hex
-	if (n >= 16)              // recalls ft_puthex if > 16
+	if (n >= 16)              			// recalls ft_puthex if > 16
 		count = count + ft_puthex(n / 16);
 	write(1, &hex[n % 16], 1);
 	count++;
-	return (count);
+	return(count);
 }
 
 int	ft_printf(const char *str, ...)
@@ -114,5 +112,56 @@ int	ft_printf(const char *str, ...)
 		i++;
 	}
 	va_end(args);
-	return (count);
+	return(count);
 }
+
+/*
+#ifndef REAL
+# define F	r += ft_printf
+#else
+# define F	r += printf
+#endif
+
+int
+	main(void)
+{
+	int	r;
+
+	r = 0;
+	F("Simple test\n");
+	F("");
+	F("--Format---");
+	F("\n");
+	F("%d\n", 0);
+	F("%d\n", 42);
+	F("%d\n", 1);
+	F("%d\n", 5454);
+	F("%d\n", (int)2147483647);
+	F("%d\n", (int)2147483648);
+	F("%d\n", (int)-2147483648);
+	F("%d\n", (int)-2147483649);
+	F("\n");
+	F("%x\n", 0);
+	F("%x\n", 42);
+	F("%x\n", 1);
+	F("%x\n", 5454);
+	F("%x\n", (int)2147483647);
+	F("%x\n", (int)2147483648);
+	F("%x\n", (int)-2147483648);
+	F("%x\n", (int)-2147483649);
+	F("%x\n", (int)0xFFFFFFFF);
+	F("\n");
+	F("%s\n", "");
+	F("%s\n", "toto");
+	F("%s\n", "wiurwuyrhwrywuier");
+	F("%s\n", NULL);
+	F("-%s-%s-%s-%s-\n", "", "toto", "wiurwuyrhwrywuier", NULL);
+	F("\n--Mixed---\n");
+	F("%d%x%d%x%d%x%d%x\n", 0, 0, 42, 42, 2147483647, 2147483647, (int)-2147483648, (int)-2147483648);
+	F("-%d-%x-%d-%x-%d-%x-%d-%x-\n", 0, 0, 42, 42, 2147483647, 2147483647, (int)-2147483648, (int)-2147483648);
+	F("\n");
+	F("%s%s%s%s\n", "", "toto", "wiurwuyrhwrywuier", NULL);
+	F("-%s-%s-%s-%s-\n", "", "toto", "wiurwuyrhwrywuier", NULL);
+	printf("written: %d\n", r);
+}
+*/
