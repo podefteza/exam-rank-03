@@ -79,11 +79,9 @@ int	ft_puthex(unsigned int n)
 int	ft_printf(const char *str, ...)
 {
 	va_list	args;
-	int		count;
-	int		i;
+	int		count = 0;
+	int		i = 0;
 
-	count = 0;
-	i = 0;
 	va_start(args, str);
 	while (str[i])
 	{
