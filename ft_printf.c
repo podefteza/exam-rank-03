@@ -78,16 +78,16 @@ int	ft_puthex(unsigned int n)
 
 int	ft_printf(const char *str, ...)
 {
-	va_list	args;
+	va_list	args;			// list of variable number of arguments
 	int		count = 0;
 	int		i = 0;
 
-	va_start(args, str);
+	va_start(args, str);		// start of the list
 	while (str[i])
 	{
-		if (str[i] == '%')
+		if (str[i] == '%')	// when a "%" is found...
 		{
-			i++;
+			i++;		// check the character after "%"
 			if (str[i] == 's')
 				count += ft_putstr(va_arg(args, char *));
 			else if (str[i] == 'd')
@@ -101,7 +101,7 @@ int	ft_printf(const char *str, ...)
 				count = count + 2;
 			}
 		}
-		else
+		else			// otherwise, write the "%" sign
 		{
 			write(1, &str[i], 1);
 			count++;
@@ -109,8 +109,8 @@ int	ft_printf(const char *str, ...)
 
 		i++;
 	}
-	va_end(args);
-	return(count);
+	va_end(args);			// end of the the va
+	return(count);			// return the number of characters writen
 }
 
 /*
